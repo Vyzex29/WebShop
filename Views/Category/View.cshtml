@@ -1,0 +1,29 @@
+﻿@model ProductViewModel
+
+@if(Model.Products.Count == 0){
+    <p>There are no products under selected category</p>
+}else
+{
+    <p>Category: @Model.CategoryName</p>
+    <table class="table table-striped">
+    <tr class="firstRow">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>More Info</th>
+    </tr>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@product.Price</td>
+            <td><a asp-area="" asp-controller="Product" asp-action="View" asp-route-id="@product.Id">More info</a></td>
+        </tr>
+    }
+</table>
+<br />
+<a asp-controller="Category" asp-action="Index">Back</a>
+}

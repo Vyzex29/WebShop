@@ -1,0 +1,19 @@
+﻿@model ProductModel
+
+<div class="container-fluid">
+    Id: @Model.Id
+</div>
+<div class="container-fluid">
+    Name: @Model.Name
+</div>
+<div class="container-fluid">
+    Description: @Model.Description
+</div>
+<div class="container-fluid">
+    Description: @Model.Price
+</div>
+<div class="container-fluid">
+    Category: @Model.category.Name
+</div>
+<br />
+<a asp-controller="Product" asp-action="Index">Back</a>
