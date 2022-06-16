@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using WebShop.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<WebShopDbContext>
+    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDb")));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

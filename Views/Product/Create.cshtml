@@ -1,0 +1,30 @@
+﻿@model CreateProductModel
+
+<form asp-controller="Product" asp-action="Create" method="post">
+   <p>Category Creation</p>
+  <div class="mb-3">
+    <label asp-for="Name" class="form-label">Name:</label>
+    <input asp-for="Name" type="text" class="form-control">
+    @Html.ValidationMessageFor(m => m.Name)
+  </div>
+  <div class="mb-3">
+    <label asp-for="Description" class="form-label">Description:</label>
+    <input asp-for="Description" type="text" class="form-control">
+    @Html.ValidationMessageFor(m => m.Description)
+  </div>
+  <div class="mb-3">
+    <label asp-for="Price" class="form-label">Price:</label>
+    <input asp-for="Price" type="number" class="form-control">
+    @Html.ValidationMessageFor(m => m.Price)
+  </div>
+  <div class="mb-3">
+  <label asp-for="CategoryId">Select a category</label>
+  <select asp-for="CategoryId" class="form-select mt-3">
+     @foreach (var category in Model.Categories)
+     {
+         <option value="@category.Id">@category.Name</option>
+     }
+   </select>
+   </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
