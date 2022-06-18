@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebShop.Context;
 using WebShop.Context.Entity;
 using WebShop.Models;
@@ -63,7 +64,10 @@ namespace WebShop.Controllers
             var productViewModel = new ProductViewModel();
             using (_context)
             { 
-                var selectedCategory = _context.Categories.FirstOrDefault(c => c.Id == id);
+                var selectedCategory = _context.Categories
+                    .Include(c=>c.Products) // INCLUDE IS IMPRTANT to get the foreign key data
+                    .FirstOrDefault(c => c.Id == id);
+
                 if(selectedCategory is null)
                 {
                     return RedirectToAction(nameof(Index));
