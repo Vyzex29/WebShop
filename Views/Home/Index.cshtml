@@ -1,8 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">
+              Categories
+            </a>
+                @foreach (var category in Model.categories)
+                {
+                     <a asp-controller="Home" asp-action="Index" asp-route-selectedCategory="@category.Id" class="list-group-item">@category.Name <span class="badge">4</span></a>
+                }
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <ol class="breadcrumb">
+            <li  class="breadcrumb-item"><a href="#">Home</a></li>
+            <li  class="breadcrumb-item"><a href="#">Electronics</a></li>
+            <li  class="breadcrumb-item active">Mobile</li>
+          </ol>
+          <div>
+            <div class="row">
+                    @if(Model.products.Count == 0)
+                    {
+                        <p>There are no products in the selected category.</p>
+                    }
+                    else
+                    {
+                        @foreach(var product in Model.products)
+                        {
+                         <div class="col-sm-6 col-md-4">
+                             <div class="thumbnail">
+                                 <img class="img-thumbnail" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTY2OTUzZGI1ZWMgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMnB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNjY5NTNkYjVlYyI+PHJlY3Qgd2lkdGg9IjI0MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI4OS44NTkzNzUiIHk9IjEwNS40Ij4yNDJ4MjAwPC90ZXh0PjwvZz48L2c+PC9zdmc+" alt="..."/>
+                                 <div class="caption text-center">
+                                     <h3>@product.Name</h3>
+                                     <p>Price: <span>$@product.Price</span></p>
+                                     <p><a href="#" class="btn btn-primary" role="button">Add to cart</a></p>
+                                 </div>
+                             </div>
+                          </div>
+                        }
+                    }
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
