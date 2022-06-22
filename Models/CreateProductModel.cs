@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WebShop.Context.Entity;
-
+﻿using DataAccess.Context.Entity;
+using System.ComponentModel.DataAnnotations;
 namespace WebShop.Models
 {
     public class CreateProductModel

@@ -1,31 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess.Context;
+using DataAccess.Context.Entity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebShop.Context;
-using WebShop.Context.Entity;
+using WebShop.Extensions;
 using WebShop.Models;
+using WebShopServices.Managers;
 
 namespace WebShop.Controllers
 {
     public class CategoryController : Controller
     {
         private readonly WebShopDbContext _context;
-        public CategoryController(WebShopDbContext context)
+
+        private readonly ICategoryManager _categoryManager;
+        public CategoryController(WebShopDbContext context, ICategoryManager categoryManager)
         {
             _context = context;
+            _categoryManager = categoryManager;
         }
-        
+
         //adress.com/Category
         public IActionResult Index()
         {
-           List <CategoryModel> categories = new List<CategoryModel>();
-            using (_context)
-            {
-                categories = _context.Categories.Select(categoryFromDb => new CategoryModel
-                {
-                    Id = categoryFromDb.Id,
-                    Name = categoryFromDb.Name
-                }).ToList();
-            }
+           List <CategoryModel> categories = _categoryManager.GetAll()
+                .Select(categoryFromDb => categoryFromDb.ToModel()).ToList();
 
             return View(categories);
         }
@@ -50,8 +48,8 @@ namespace WebShop.Controllers
                 {
                     Name = category.Name
                 };
-                _context.Categories.Add(createdCategory);
-                _context.SaveChanges();
+                _categoryManager.Add(createdCategory);
+                
 
                 return RedirectToAction(nameof(Index));
             }

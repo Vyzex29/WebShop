@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebShop.Context;
-using WebShop.Context.Entity;
+﻿using DataAccess.Context;
+using DataAccess.Context.Entity;
+using Microsoft.AspNetCore.Mvc;
 using WebShop.Models;
 
 namespace WebShop.Controllers
