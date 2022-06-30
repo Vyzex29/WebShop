@@ -10,6 +10,6 @@
 
         public int Price { get; set; }
 
-        public Category Category { get; set; }
+        public SubCategory Subcategory { get; set; }
     }
 }

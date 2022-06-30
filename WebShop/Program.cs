@@ -5,11 +5,12 @@ using WebShopServices.Managers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddTransient<ICategoryManager, CategoryManager>();
+builder.Services.AddScoped<ICategoryManager, CategoryManager>();
+builder.Services.AddScoped<IUserManager, UserManager>();
 builder.Services.AddDbContext<WebShopDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDb")));
+builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +27,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

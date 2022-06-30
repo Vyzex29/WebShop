@@ -62,7 +62,7 @@ namespace WebShop.Controllers
             var productViewModel = new ProductViewModel();
             using (_context)
             { 
-                var selectedCategory = _context.Categories
+                var selectedCategory = _context.SubCategories
                     .Include(c=>c.Products) // INCLUDE IS IMPRTANT to get the foreign key data
                     .FirstOrDefault(c => c.Id == id);
 

@@ -3,7 +3,7 @@ using WebShop.Models;
 
 namespace WebShop.Extensions
 {
-    public static class CategoryExtensions
+    public static class CategoryExtension
     {
         public static CategoryModel ToModel(this Category category)
         {

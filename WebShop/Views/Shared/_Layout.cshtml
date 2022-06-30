@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,6 +36,22 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="collapse navbar-collapse d-flex" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                        @if(Context.Session.GetString("username") != null)
+                        {
+                            <li><a class="nav-link text-dark" >Hello, @Context.Session.GetString("username")!</a></li>
+                            <li><a class="nav-link text-dark" >My cart</a></li>
+                            <li><a class="nav-link text-dark" asp-controller="User" asp-action="SignOut">Sign out</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="nav-link text-dark" asp-controller="User" asp-action="SignUp">Sign up</a></li>
+                            <li><a class="nav-link text-dark" asp-controller="User" asp-action="SignIn">Sign in</a></li>
+                        }
+                  </ul>
+                </div><!-- /.navbar-collapse -->
             </div>
         </nav>
     </header>

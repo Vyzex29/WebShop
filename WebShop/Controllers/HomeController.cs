@@ -31,7 +31,7 @@ namespace WebShop.Controllers
 
                 if (categories.Exists(c=>c.Id == selectedCategory))
                 {
-                    products = _context.Products.Where(pr => pr.Category.Id == selectedCategory).Select(productFromDb => new ProductModel
+                    products = _context.Products.Where(pr => pr.Subcategory.Id == selectedCategory).Select(productFromDb => new ProductModel
                     {
                         Id = productFromDb.Id,
                         Name = productFromDb.Name,

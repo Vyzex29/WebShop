@@ -27,8 +27,8 @@ namespace WebShop.Controllers
                     Price = productFromDb.Price,
                     category = new CategoryModel
                     {
-                        Id = productFromDb.Category.Id,
-                        Name = productFromDb.Category.Name
+                        Id = productFromDb.Subcategory.Id,
+                        Name = productFromDb.Subcategory.Name
                     }
                 }).OrderBy(product => product.Name)
                 .ToList();
@@ -53,13 +53,13 @@ namespace WebShop.Controllers
             ModelState.Remove(nameof(product.Categories));
             if (ModelState.IsValid)
             {
-                var selectedCategory = _context.Categories.First(c => c.Id == product.CategoryId);
+                var selectedCategory = _context.SubCategories.First(c => c.Id == product.CategoryId);
                 var createdProduct = new Product
                 {
                     Name = product.Name,
                     Description= product.Description,
                     Price = product.Price,
-                    Category = selectedCategory
+                    Subcategory = selectedCategory
                 };
 
                 _context.Products.Add(createdProduct);
@@ -83,7 +83,7 @@ namespace WebShop.Controllers
                 }
                 else
                 {
-                    var category = _context.Products.Where(c => c.Id == id).Select(p => p.Category).First();
+                    var category = _context.Products.Where(c => c.Id == id).Select(p => p.Subcategory).First();
                     productModel.Id = selectedProduct.Id;
                     productModel.Name = selectedProduct.Name;
                     productModel.Description = selectedProduct.Description;
