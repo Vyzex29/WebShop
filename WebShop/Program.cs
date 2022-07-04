@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<ICategoryManager, CategoryManager>();
 builder.Services.AddScoped<IUserManager, UserManager>();
+builder.Services.AddScoped<ISubCategoryManager, SubCategoryManager>();
 builder.Services.AddDbContext<WebShopDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDb")));
 builder.Services.AddSession();

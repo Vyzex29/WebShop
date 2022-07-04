@@ -10,6 +10,6 @@
 
         public int Price { get; set; }
 
-        public CategoryModel category { get; set; }
+        public SubCategoryModel category { get; set; }
     }
 }

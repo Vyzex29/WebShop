@@ -2,7 +2,7 @@
 
 namespace WebShop.Models
 {
-    public class CategoryModel
+    public class SubCategoryModel
     {
         public int Id { get; set; }
 
@@ -10,6 +10,8 @@ namespace WebShop.Models
         [StringLength(200)]
         public string Name { get; set; }
 
-        public List<SubCategoryModel> SubCategories { get; set; }
+        public CategoryModel Category { get; set; }
+
+        public List<ProductModel> Products { get; set; }
     }
 }

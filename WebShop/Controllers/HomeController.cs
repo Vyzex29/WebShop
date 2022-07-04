@@ -1,6 +1,8 @@
 ﻿using DataAccess.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using WebShop.Extensions;
 using WebShop.Models;
 
 namespace WebShop.Controllers
@@ -23,22 +25,15 @@ namespace WebShop.Controllers
             List<ProductModel> products = new List<ProductModel>();
             using (_context)
             {
-                categories = _context.Categories.Select(categoryFromDb => new CategoryModel
-                {
-                    Id = categoryFromDb.Id,
-                    Name = categoryFromDb.Name
-                }).ToList();
+                categories = _context.Categories.Include(c => c.SubCategories)
+                    .Select(categoryFromDb => categoryFromDb.ToModel()).ToList();
 
                 if (categories.Exists(c=>c.Id == selectedCategory))
                 {
-                    products = _context.Products.Where(pr => pr.Subcategory.Id == selectedCategory).Select(productFromDb => new ProductModel
-                    {
-                        Id = productFromDb.Id,
-                        Name = productFromDb.Name,
-                        Description = productFromDb.Description,
-                        Price = productFromDb.Price
-                    }).OrderBy(product => product.Name)
-                .ToList();
+                    products = _context.Products
+                        .Where(pr => pr.Subcategory.Id == selectedCategory)
+                        .OrderBy(product => product.Name)
+                        .Select(productFromDb => productFromDb.ToModel()).ToList();
                 }
                 
             }

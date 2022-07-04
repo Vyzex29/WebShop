@@ -33,7 +33,7 @@ namespace WebShop.Controllers
         {
             var categoryModel = new CategoryModel
             {
-                Products = new List<ProductModel>()
+                SubCategories = new List<SubCategoryModel>()
             };
             return View(categoryModel);
         }
@@ -41,7 +41,7 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult Create(CategoryModel category)
         {
-            ModelState.Remove(nameof(category.Products));
+            ModelState.Remove(nameof(category.SubCategories));
             if (ModelState.IsValid)
             {
                 var createdCategory = new Category

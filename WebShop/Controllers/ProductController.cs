@@ -25,7 +25,7 @@ namespace WebShop.Controllers
                     Name = productFromDb.Name,
                     Description = productFromDb.Description,
                     Price = productFromDb.Price,
-                    category = new CategoryModel
+                    category = new SubCategoryModel
                     {
                         Id = productFromDb.Subcategory.Id,
                         Name = productFromDb.Subcategory.Name
@@ -88,7 +88,7 @@ namespace WebShop.Controllers
                     productModel.Name = selectedProduct.Name;
                     productModel.Description = selectedProduct.Description;
                     productModel.Price = selectedProduct.Price;
-                    productModel.category = new CategoryModel
+                    productModel.category = new SubCategoryModel
                     {
                         Name = category.Name
                     };

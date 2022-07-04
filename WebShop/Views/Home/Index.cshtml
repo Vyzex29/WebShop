@@ -2,17 +2,22 @@
 
 <div class="container">
       <div class="row">
-        <div class="col-sm-4">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">
-              Categories
-            </a>
-                @foreach (var category in Model.categories)
-                {
-                     <a asp-controller="Home" asp-action="Index" asp-route-selectedCategory="@category.Id" class="list-group-item">@category.Name <span class="badge">4</span></a>
-                }
-          </div>
-        </div>
+           <div class="col-sm-4">
+             @foreach(var category in Model.categories)
+            {
+           
+              <div class="list-group">
+                <a href="#" class="list-group-item active">
+                  @category.Name
+                </a>
+                    @foreach (var subcategory in category.SubCategories)
+                    {
+                         <a asp-controller="Home" asp-action="Index" asp-route-selectedCategory="@subcategory.Id" class="list-group-item">@subcategory.Name <span class="badge">4</span></a>
+                    }
+              </div>
+       
+            }
+         </div>
         <div class="col-sm-8">
           <ol class="breadcrumb">
             <li  class="breadcrumb-item"><a href="#">Home</a></li>
