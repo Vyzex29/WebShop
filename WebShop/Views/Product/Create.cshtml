@@ -1,6 +1,6 @@
 ﻿@model CreateProductModel
-
-<form asp-controller="Product" asp-action="Create" method="post">
+@Html.ValidationSummary()
+<form asp-controller="Product" asp-action="Create" method="post" enctype="multipart/form-data">
    <p>Adding a product</p>
   <div class="mb-3">
     <label asp-for="Name" class="form-label">Name:</label>
@@ -26,5 +26,21 @@
      }
    </select>
    </div>
+     <div class="mb-5">
+                <label asp-for="Image" class="form-label">image Upload with Preview</label>
+                <input asp-for="Image" class="form-control" type="file" id="formFile" onchange="preview()">
+                <button onclick="clearImage()" class="btn btn-primary mt-3">Click me</button>
+            </div>
+            <img id="frame" src="" class="img-fluid" />
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+         <script>
+            function preview() {
+                frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+            function clearImage() {
+                document.getElementById('formFile').value = null;
+                frame.src = "";
+            }
+        </script>

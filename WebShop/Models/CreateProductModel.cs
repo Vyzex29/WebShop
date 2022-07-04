@@ -16,6 +16,10 @@ namespace WebShop.Models
         [Required]
         public int CategoryId { get; set; }
 
+        public string FilePath { get; set; }
+
+        public IFormFile Image { get; set; }
+
         public List<SubCategory> SubCategories { get; set; }
     }
 }

@@ -10,6 +10,10 @@
 
         public int Price { get; set; }
 
+        public string? Filepath { get; set; }
+
+        public byte[]? Image { get; set; } 
+
         public SubCategory Subcategory { get; set; }
     }
 }

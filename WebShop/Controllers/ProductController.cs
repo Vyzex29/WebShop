@@ -51,22 +51,43 @@ namespace WebShop.Controllers
         public IActionResult Create(CreateProductModel product)
         {
             ModelState.Remove(nameof(product.SubCategories));
+            ModelState.Remove(nameof(product.FilePath));
+            ModelState.Remove(nameof(product.Image));
             if (ModelState.IsValid)
             {
+                // getting file original name
+                string FileName = product.Image.FileName;
+                // combining GUID to create unique name before saving in wwwroot
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
+                // getting full path inside wwwroot/images
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Photo/", FileName);
+
+                // copying file
+                product.Image.CopyTo(new FileStream(imagePath, FileMode.Create));
+
                 var selectedCategory = _context.SubCategories.First(c => c.Id == product.CategoryId);
-                var createdProduct = new Product
+                byte[] file;
+                using (var ms = new MemoryStream())
+                {
+                    product.Image.CopyTo(ms);
+                    file = ms.ToArray();
+                }
+                    var createdProduct = new Product
                 {
                     Name = product.Name,
                     Description= product.Description,
                     Price = product.Price,
-                    Subcategory = selectedCategory
-                };
+                    Subcategory = selectedCategory,
+                    Filepath = imagePath,
+                    Image = file
+                    };
 
                 _context.Products.Add(createdProduct);
                 _context.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }
+            product.SubCategories =  _context.SubCategories.ToList();
             return View(product);
         }
 
