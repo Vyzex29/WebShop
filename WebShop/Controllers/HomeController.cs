@@ -27,15 +27,10 @@ namespace WebShop.Controllers
             {
                 categories = _context.Categories.Include(c => c.SubCategories)
                     .Select(categoryFromDb => categoryFromDb.ToModel()).ToList();
-
-                if (categories.Exists(c=>c.Id == selectedCategory))
-                {
                     products = _context.Products
                         .Where(pr => pr.Subcategory.Id == selectedCategory)
                         .OrderBy(product => product.Name)
                         .Select(productFromDb => productFromDb.ToModel()).ToList();
-                }
-                
             }
 
             var homeView = new HomeViewModel

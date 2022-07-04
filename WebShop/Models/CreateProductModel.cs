@@ -16,6 +16,6 @@ namespace WebShop.Models
         [Required]
         public int CategoryId { get; set; }
 
-        public List<Category> Categories { get; set; }
+        public List<SubCategory> SubCategories { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Context;
 using DataAccess.Context.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebShopServices.Managers
 {
@@ -21,7 +22,7 @@ namespace WebShopServices.Managers
 
         public List<Category> GetAll()
         {
-            return _context.Categories.ToList();
+            return _context.Categories.Include(c => c.SubCategories).ToList();
         }
     }
 }

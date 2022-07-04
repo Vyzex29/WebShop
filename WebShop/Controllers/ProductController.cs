@@ -25,7 +25,7 @@ namespace WebShop.Controllers
                     Name = productFromDb.Name,
                     Description = productFromDb.Description,
                     Price = productFromDb.Price,
-                    category = new SubCategoryModel
+                    SubCategory = new SubCategoryModel
                     {
                         Id = productFromDb.Subcategory.Id,
                         Name = productFromDb.Subcategory.Name
@@ -42,7 +42,7 @@ namespace WebShop.Controllers
         {
             var product = new CreateProductModel
             {
-                Categories = _context.Categories.ToList(),
+                SubCategories = _context.SubCategories.ToList(),
             };
             return View(product);
         }
@@ -50,7 +50,7 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult Create(CreateProductModel product)
         {
-            ModelState.Remove(nameof(product.Categories));
+            ModelState.Remove(nameof(product.SubCategories));
             if (ModelState.IsValid)
             {
                 var selectedCategory = _context.SubCategories.First(c => c.Id == product.CategoryId);
@@ -88,7 +88,7 @@ namespace WebShop.Controllers
                     productModel.Name = selectedProduct.Name;
                     productModel.Description = selectedProduct.Description;
                     productModel.Price = selectedProduct.Price;
-                    productModel.category = new SubCategoryModel
+                    productModel.SubCategory = new SubCategoryModel
                     {
                         Name = category.Name
                     };

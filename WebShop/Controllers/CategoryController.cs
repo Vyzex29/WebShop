@@ -62,8 +62,9 @@ namespace WebShop.Controllers
             var productViewModel = new ProductViewModel();
             using (_context)
             { 
-                var selectedCategory = _context.SubCategories
-                    .Include(c=>c.Products) // INCLUDE IS IMPRTANT to get the foreign key data
+                var selectedCategory = _context.Categories
+                    .Include(c=>c.SubCategories)
+                    .ThenInclude(sb=>sb.Products)// INCLUDE IS IMPRTANT to get the foreign key data
                     .FirstOrDefault(c => c.Id == id);
 
                 if(selectedCategory is null)
@@ -73,16 +74,19 @@ namespace WebShop.Controllers
                 else
                 {
                     productViewModel.CategoryName = selectedCategory.Name;
-                    
-                    productViewModel.Products = selectedCategory.Products is not null?
-                        selectedCategory.Products.Select(productFromDb =>
-                    new ProductModel
+                    List<ProductModel> productModels = new List<ProductModel>();
+                    var products = selectedCategory.SubCategories.SelectMany(sb => sb.Products);
+                    foreach(var productFromDb in products)
                     {
-                        Id = productFromDb.Id,
-                        Name = productFromDb.Name,
-                        Description = productFromDb.Description,
-                        Price = productFromDb.Price,
-                    }).ToList() : new List<ProductModel>();
+                        productModels.Add(new ProductModel
+                        {
+                            Id = productFromDb.Id,
+                            Name = productFromDb.Name,
+                            Description = productFromDb.Description,
+                            Price = productFromDb.Price,
+                        });
+                    }
+                    productViewModel.Products = productModels;
                 }
             }
                

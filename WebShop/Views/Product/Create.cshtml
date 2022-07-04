@@ -1,7 +1,7 @@
 ﻿@model CreateProductModel
 
 <form asp-controller="Product" asp-action="Create" method="post">
-   <p>Category Creation</p>
+   <p>Adding a product</p>
   <div class="mb-3">
     <label asp-for="Name" class="form-label">Name:</label>
     <input asp-for="Name" type="text" class="form-control">
@@ -20,7 +20,7 @@
   <div class="mb-3">
   <label asp-for="CategoryId">Select a category</label>
   <select asp-for="CategoryId" class="form-select mt-3">
-     @foreach (var category in Model.Categories)
+     @foreach (var category in Model.SubCategories)
      {
          <option value="@category.Id">@category.Name</option>
      }
