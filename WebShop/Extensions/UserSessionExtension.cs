@@ -4,16 +4,16 @@ namespace WebShop.Extensions
 {
     public static class UserSessionExtension
     {
-        public static void SetSession(this HttpContext context, User user)
+        public static void SetSession(this ISession session, User user)
         {
-            context.Session.SetInt32("id", user.Id);
-            context.Session.SetString("username", user.Username);
-            context.Session.SetString("email", user.Email);
+            session.SetInt32("id", user.Id);
+            session.SetString("username", user.Username);
+            session.SetString("email", user.Email);
         }
 
-        public static string GetUsername(this HttpContext context)
+        public static string? GetUsername(this ISession session)
         {
-            return context.Session.GetString("username");
+            return session.GetString("username");
         }
     }
 }

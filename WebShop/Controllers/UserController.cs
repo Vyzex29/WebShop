@@ -32,7 +32,7 @@ namespace WebShop.Controllers
             }
             else
             {
-                HttpContext.SetSession(user);
+                HttpContext.Session.SetSession(user);
             }
             return RedirectToAction("Index", "Home");
         }
