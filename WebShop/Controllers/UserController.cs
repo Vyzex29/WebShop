@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Context.Entity;
+using Microsoft.AspNetCore.Mvc;
 using WebShop.Extensions;
 using WebShop.Models;
 using WebShopServices.Managers;
@@ -10,9 +10,12 @@ namespace WebShop.Controllers
     {
         private readonly IUserManager _userManager;
 
-        public UserController(IUserManager userManager)
+        private readonly ICartManager _cartManager;
+
+        public UserController(IUserManager userManager, ICartManager cartManager)
         {
             _userManager = userManager;
+            _cartManager = cartManager;
         }
 
         public IActionResult SignIn()
@@ -32,7 +35,18 @@ namespace WebShop.Controllers
             }
             else
             {
-                HttpContext.Session.SetSession(user);
+                var cartDoesntExist = !_cartManager.CheckWhetherUserHasCart(user.Id);
+                Cart cart;
+                if (cartDoesntExist)
+                {
+                    _cartManager.CreateCart(new Cart
+                    {
+                        User = user
+                    });
+                }
+                cart = _cartManager.GetUserCart(user.Id);
+
+                HttpContext.Session.SetSession(user, cart);
             }
             return RedirectToAction("Index", "Home");
         }
