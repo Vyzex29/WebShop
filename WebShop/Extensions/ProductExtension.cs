@@ -12,7 +12,8 @@ namespace WebShop.Extensions
                 Id = productFromDb.Id,
                 Name = productFromDb.Name,
                 Description = productFromDb.Description,
-                Price = productFromDb.Price
+                Price = productFromDb.Price,
+                FileName = productFromDb.ImageName
             };
 
             return productModel;

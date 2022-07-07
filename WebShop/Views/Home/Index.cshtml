@@ -36,7 +36,7 @@
                         {
                          <div class="col-sm-6 col-md-4">
                              <div class="thumbnail">
-                                 <img class="img-thumbnail" src="Photo/volvo.jpg" alt="..."/>
+                                 <img class="img-thumbnail" src="@(System.IO.Path.Combine("Photo", product.FileName))" alt="..."/>
                                  <div class="caption text-center">
                                      <h3>@product.Name</h3>
                                      <p>Price: <span>$@product.Price</span></p>

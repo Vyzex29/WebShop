@@ -10,6 +10,8 @@
 
         public int Price { get; set; }
 
+        public string? FileName { get; set; }
+
         public SubCategoryModel SubCategory { get; set; }
     }
 }

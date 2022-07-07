@@ -20,4 +20,8 @@
     <ProjectReference Include="..\WebShopServices\WebShopServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Photo\" />
+  </ItemGroup>
+
 </Project>

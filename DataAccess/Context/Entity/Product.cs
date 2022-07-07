@@ -10,7 +10,7 @@
 
         public int Price { get; set; }
 
-        public string? Filepath { get; set; }
+        public string? ImageName { get; set; }
 
         public byte[]? Image { get; set; } 
 
