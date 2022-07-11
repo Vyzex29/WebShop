@@ -1,0 +1,37 @@
+﻿@model CartModel
+
+@if(Model.CartItems.Count == 0){
+    <p>There are no items in the cart</p>
+}else
+{
+    <table class="table table-striped">
+    <tr class="firstRow">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Remove item</th>
+    </tr>
+    @foreach (var cartItem in Model.CartItems)
+    {
+        <tr>
+            <td><img class="img-thumbnail" src="@(System.IO.Path.Combine("Photo", cartItem.Product.FileName))" alt="..."/></td>
+            <td>@cartItem.Product.Name</td>
+            <td>@cartItem.Product.Description</td>
+            <td>@cartItem.Quantity</td>
+            <td>@cartItem.Product.Price</td>
+            <td>
+                <form asp-controller="Cart" asp-action="RemoveAnItem" asp-route-cartItemId="@cartItem.Id">
+                    <button type ="submit" class="btn btn-outline-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                        </svg>
+                     </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<a class="btn btn-primary" asp-controller="Cart" asp-action="Purchase">Buy</a>
+}

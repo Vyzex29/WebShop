@@ -42,7 +42,7 @@
                         @if(Context.Session.GetUsername() != null)
                         {
                             <li><a class="nav-link text-dark" >Hello, @Context.Session.GetUsername()!</a></li>
-                            <li><a class="nav-link text-dark" >My cart</a></li>
+                            <li><a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">My cart</a></li>
                             <li><a class="nav-link text-dark" asp-controller="User" asp-action="SignOut">Sign out</a></li>
                         }
                         else

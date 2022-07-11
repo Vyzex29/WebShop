@@ -1,0 +1,27 @@
+﻿@model PurchaseModel
+
+@if(Model.CartItems.Count == 0){
+    <p>There are no items in the cart</p>
+}else
+{
+    <table class="table table-striped">
+    <tr class="firstRow">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var cartItem in Model.CartItems)
+    {
+        <tr>
+            <td><img class="img-thumbnail" src="@(@Url.Content(System.IO.Path.Combine("Photo", cartItem.Product.FileName)))" alt="..."/></td>
+            <td>@cartItem.Product.Name</td>
+            <td>@cartItem.Product.Description</td>
+            <td>@cartItem.Quantity</td>
+            <td>@cartItem.Product.Price</td>
+        </tr>
+    }
+</table>
+    <h2> Total cost: @Model.TotalPrice</h2>
+}

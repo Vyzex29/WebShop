@@ -8,6 +8,8 @@ namespace WebShopServices.Managers
 
         User? GetUser(string email, string password);
 
+        User? GetUser(int id);
+
         bool CheckIfUserEmailExists(string email);
     }
 }

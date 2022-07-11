@@ -5,9 +5,14 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShop", "WebShop.csproj", "{F9F77B7B-21E0-4442-B212-042D6E7A44CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "..\DataAccess\DataAccess.csproj", "{81834B4C-F685-4BAE-8A69-72DA80290C3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "..\DataAccess\DataAccess.csproj", "{81834B4C-F685-4BAE-8A69-72DA80290C3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopServices", "..\WebShopServices\WebShopServices.csproj", "{C294919A-6306-4DF1-AC7A-13761233250B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopServices", "..\WebShopServices\WebShopServices.csproj", "{C294919A-6306-4DF1-AC7A-13761233250B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B3AB46D-6ECF-462D-9C51-52BD414DF2C5}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

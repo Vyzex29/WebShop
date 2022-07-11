@@ -41,7 +41,9 @@
                                  <div class="caption text-center">
                                      <h3>@product.Name</h3>
                                      <p>Price: <span>$@product.Price</span></p>
-                                     <p><a asp-controller="Cart" asp-action="AddAnItem" class="btn btn-primary" role="button">Add to cart</a></p>
+                                     <form asp-controller="Cart" asp-action="AddAnItem" asp-route-itemId="@product.Id" method="post">
+                                         <button type="submit" class="btn btn-primary" role="button">Add to cart</button>
+                                     </form>
                                  </div>
                              </div>
                           </div>

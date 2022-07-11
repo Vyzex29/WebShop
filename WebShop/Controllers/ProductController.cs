@@ -60,7 +60,7 @@ namespace WebShop.Controllers
                 // combining GUID to create unique name before saving in wwwroot
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
                 // getting full path inside wwwroot/images
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Photo", FileName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Photo", uniqueFileName);
 
                 // copying file
                 product.Image.CopyTo(new FileStream(imagePath, FileMode.Create));
@@ -78,7 +78,7 @@ namespace WebShop.Controllers
                     Description= product.Description,
                     Price = product.Price,
                     Subcategory = selectedCategory,
-                    ImageName = FileName,
+                    ImageName = uniqueFileName,
                     Image = file
                     };
 

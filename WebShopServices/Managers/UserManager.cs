@@ -44,5 +44,9 @@ namespace WebShopServices.Managers
             }
         }
 
+        public User? GetUser(int id)
+        {
+            return _context.Users.First(u => u.Id == id);
+        }
     }
 }
