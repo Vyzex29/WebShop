@@ -10,7 +10,5 @@
 
         public string Password { get; set; }
 
-        public Cart Cart { get; set; }
-
     }
 }

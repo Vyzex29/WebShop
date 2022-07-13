@@ -7,8 +7,6 @@ namespace DataAccess.Context.Entity
 
         public int UserId { get; set; }
 
-        public virtual User User { get; set; }
-
         public virtual List<CartItem> CartItems { get; set; }
 
         public bool IsPurchased { get; set; }

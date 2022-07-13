@@ -35,6 +35,13 @@ namespace WebShop.Controllers
         }
 
         [HttpPost]
+        public IActionResult SubtractAnItem(int itemId)
+        {
+            _cartManager.SubtractItemFromCart((int)HttpContext.Session.GetUserId(), itemId);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
         public IActionResult RemoveAnItem(int cartItemId)
         {
             _cartManager.RemoveItemFromCart((int)HttpContext.Session.GetUserId(), cartItemId);
@@ -50,10 +57,9 @@ namespace WebShop.Controllers
             }
             var purchaseModel = _cartManager.GetUserCart((int)userId).ToPurchaseModel();
             _cartManager.Purchase((int)userId);
-            var user = _userManager.GetUser((int)userId);
             _cartManager.CreateCart(new Cart
             {
-                User = user
+                UserId = (int)userId
             });
             return View(purchaseModel);
         }

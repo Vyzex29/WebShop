@@ -1,25 +1,43 @@
 ﻿@model CartModel
-
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
 @if(Model.CartItems.Count == 0){
     <p>There are no items in the cart</p>
 }else
 {
     <table class="table table-striped">
     <tr class="firstRow">
-        <th>Image</th>
+        <th class="col-sm-3">Image</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Quantity</th>
+        <th class="col-sm-2">Quantity</th>
         <th>Price</th>
         <th>Remove item</th>
     </tr>
     @foreach (var cartItem in Model.CartItems)
     {
         <tr>
-            <td><img class="img-thumbnail" src="@(System.IO.Path.Combine("Photo", cartItem.Product.FileName))" alt="..."/></td>
+            <td class="col-sm-3"><img class="img-fluid" src="@(System.IO.Path.Combine("Photo", cartItem.Product.FileName))" alt="..."/></td>
             <td>@cartItem.Product.Name</td>
             <td>@cartItem.Product.Description</td>
-            <td>@cartItem.Quantity</td>
+            <td class="col-sm-2">
+                <div class="input-group">
+                    <form asp-controller="Cart" asp-action="SubtractAnItem" asp-route-itemId="@cartItem.Product.Id" method="post">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-danger btn-number"  data-type="minus">
+                            <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        </span>
+                    </form>
+                  <input type="text" class="form-control input-number" value="@cartItem.Quantity" readonly>
+                  <form asp-controller="Cart" asp-action="AddAnItem" asp-route-itemId="@cartItem.Product.Id" method="post">
+                      <span class="input-group-btn">
+                      <button type="submit" class="btn btn-success btn-number" data-type="plus">
+                          <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                     </span>
+                  </form>
+                </div>
+            </td>
             <td>@cartItem.Product.Price</td>
             <td>
                 <form asp-controller="Cart" asp-action="RemoveAnItem" asp-route-cartItemId="@cartItem.Id">

@@ -41,7 +41,7 @@ namespace WebShop.Controllers
                 {
                     _cartManager.CreateCart(new Cart
                     {
-                        User = user
+                        UserId = user.Id,
                     });
                 }
                 cart = _cartManager.GetUserCart(user.Id);

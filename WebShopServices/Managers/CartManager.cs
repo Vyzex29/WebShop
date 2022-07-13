@@ -71,5 +71,19 @@ namespace WebShopServices.Managers
             cart.CartItems.Remove(cartItemToRemove);
             _context.SaveChanges();
         }
+
+        public void SubtractItemFromCart(int userId, int productId)
+        {
+            Cart cart = GetUserCart(userId);
+            if (cart.CartItems.Exists(ci => ci.Product.Id == productId))
+            {
+                var existingCartItem = cart.CartItems.First(ci => ci.Product.Id == productId);
+                if (existingCartItem.Quantity > 1)
+                {
+                    existingCartItem.Quantity -= 1;
+                }
+                _context.SaveChanges();
+            }
+        }
     }
 }
