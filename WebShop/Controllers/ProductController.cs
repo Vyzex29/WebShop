@@ -1,6 +1,7 @@
 ﻿using DataAccess.Context;
 using DataAccess.Context.Entity;
 using Microsoft.AspNetCore.Mvc;
+using WebShop.Extensions;
 using WebShop.Models;
 
 namespace WebShop.Controllers
@@ -16,6 +17,11 @@ namespace WebShop.Controllers
 
         public IActionResult Index()
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             List<ProductModel> products = new List<ProductModel>();
             using (_context)
             {
@@ -40,6 +46,11 @@ namespace WebShop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             var product = new CreateProductModel
             {
                 SubCategories = _context.SubCategories.ToList(),
@@ -50,6 +61,11 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult Create(CreateProductModel product)
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             ModelState.Remove(nameof(product.SubCategories));
             ModelState.Remove(nameof(product.FilePath));
             ModelState.Remove(nameof(product.Image));
@@ -94,6 +110,11 @@ namespace WebShop.Controllers
 
         public IActionResult View(int id)
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             var productModel = new ProductModel();
             using (_context)
             {

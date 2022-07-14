@@ -1,14 +1,14 @@
 ## Suggestions:
 ## webShop related:
-	- Make the cart table save preivous carts - done
-	- Adjust images in the cart view - done
-	- Improved quantity functionality ( + and -) - done
+	- Make the cart table save preivous carts - Done
+	- Adjust images in the cart view - Done
+	- Improved quantity functionality ( + and -) - Done
 
-	- Separation into admin and regular buyers
+	- Separation into admin and regular buyers - Done
 
 	- editable field for quantity - * bonus Blazor or jquerry
 	- Search function (Jquerry :)) ** more complex
-
+	- unitTests - this will help enforce SOLID and clean code
 ## Explanations:
 	- Extensions explanation a bit more
 	- Interfaces and registering containers

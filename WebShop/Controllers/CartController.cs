@@ -30,6 +30,11 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult AddAnItem(int itemId)
         {
+            var userId = HttpContext.Session.GetUserId();
+            if (userId is null)
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             _cartManager.AddItemToCart((int)HttpContext.Session.GetUserId(), itemId);
             return RedirectToAction(nameof(Index));
         }

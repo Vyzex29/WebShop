@@ -10,6 +10,7 @@ namespace WebShop.Extensions
             session.SetString("username", user.Username);
             session.SetString("email", user.Email);
             session.SetInt32("cartId", cart.Id);
+            session.SetString("UserRole", user.Role.ToString());
         }
 
         public static string? GetUsername(this ISession session)
@@ -25,6 +26,11 @@ namespace WebShop.Extensions
         public static int? GetCartId(this ISession session)
         {
             return session.GetInt32("cartId");
+        }
+
+        public static string? GetUserRole(this ISession session)
+        {
+            return session.GetString("UserRole");
         }
     }
 }

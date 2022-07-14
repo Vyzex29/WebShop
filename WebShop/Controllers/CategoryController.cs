@@ -22,7 +22,12 @@ namespace WebShop.Controllers
         //adress.com/Category
         public IActionResult Index()
         {
-           List <CategoryModel> categories = _categoryManager.GetAll()
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
+            List <CategoryModel> categories = _categoryManager.GetAll()
                 .Select(categoryFromDb => categoryFromDb.ToModel()).ToList();
 
             return View(categories);
@@ -31,6 +36,11 @@ namespace WebShop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             var categoryModel = new CategoryModel
             {
                 SubCategories = new List<SubCategoryModel>()
@@ -41,6 +51,11 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult Create(CategoryModel category)
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             ModelState.Remove(nameof(category.SubCategories));
             if (ModelState.IsValid)
             {
@@ -59,6 +74,11 @@ namespace WebShop.Controllers
         // adress.com/Category/View/{id} --> FIND ALL PRODUCTS UNDER A SPECIFIC CATEGORY
         public IActionResult View(int id)
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             var productViewModel = new ProductViewModel();
             using (_context)
             { 

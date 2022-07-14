@@ -19,6 +19,11 @@ namespace WebShop.Controllers
 
         public IActionResult Index()
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             List<SubCategoryModel> categories = _subCategoryManager.GetAll()
                  .Select(categoryFromDb => categoryFromDb.ToModel()).ToList();
 
@@ -29,6 +34,11 @@ namespace WebShop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             var categoryModel = new CreateSubCategoryModel
             {
                 Categories = _categoryManager.GetAll()
@@ -39,6 +49,11 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult Create(CreateSubCategoryModel subcategory)
         {
+            var userRole = HttpContext.Session.GetUserRole();
+            if (userRole == null || userRole == Role.Regular.ToString())
+            {
+                return RedirectToAction("SignIn", "User");
+            }
             ModelState.Remove(nameof(subcategory.Categories));
             if (ModelState.IsValid)
             {
