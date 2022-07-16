@@ -1,6 +1,7 @@
 using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using WebShopServices.Managers;
+using WebShopServices.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddScoped<ICartManager, CartManager>();
 builder.Services.AddAuthentication();
 builder.Services.AddDbContext<WebShopDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDb")));
+builder.Services.AddScoped<IWebShopDbContext, WebShopDbContext>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();

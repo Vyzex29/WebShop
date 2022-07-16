@@ -9,7 +9,7 @@
 	- editable field for quantity - * bonus Blazor or jquerry
 	- Search function (Jquerry :)) ** more complex
 
-	- unitTests - this will help enforce SOLID and clean code
+	- unitTests - this will help enforce SOLID and clean code - done
 	
 ## Explanations:
 	- Extensions explanation a bit more - done~ish

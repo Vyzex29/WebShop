@@ -1,30 +1,34 @@
-﻿using DataAccess.Context;
-using DataAccess.Context.Entity;
+﻿using DataAccess.Context.Entity;
+using System.Diagnostics.CodeAnalysis;
+using WebShopServices.Repositories;
 
 namespace WebShopServices.Managers
 {
+    [ExcludeFromCodeCoverage]
     public class UserManager : IUserManager
     {
-        private readonly WebShopDbContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UserManager(WebShopDbContext context)
+        public UserManager(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public void AddUser(User user)
         {
+            if (user == null) 
+            {
+                throw new Exception("Cannot insert null as a user");
+            }
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            _userRepository.Insert(user);
             
         }
 
         public bool CheckIfUserEmailExists(string email)
         {
             bool isTaken;
-            var user = _context.Users.FirstOrDefault(u => u.Email.Equals(email));
+            var user = _userRepository.GetByEmail(email);
             isTaken = user != null;
 
             return isTaken;
@@ -32,7 +36,13 @@ namespace WebShopServices.Managers
 
         public User? GetUser(string email, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email.Equals(email));
+            var user = _userRepository.GetByEmail(email);
+
+            if (user == null)
+            {
+                return null;
+            }
+
             bool verified = BCrypt.Net.BCrypt.Verify(password, user.Password);
             if (verified)
             {
@@ -46,7 +56,9 @@ namespace WebShopServices.Managers
 
         public User? GetUser(int id)
         {
-            return _context.Users.First(u => u.Id == id);
+            var user = _userRepository.GetById(id);
+
+            return user;
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Context
 {
-    public class WebShopDbContext : DbContext
+    public class WebShopDbContext : DbContext, IWebShopDbContext
     {
         /*
          * 1. Get the 3 EntityFrameworkCore packages from nuget
