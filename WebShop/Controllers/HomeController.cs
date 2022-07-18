@@ -1,6 +1,7 @@
 ﻿using DataAccess.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using WebShop.Extensions;
 using WebShop.Models;
@@ -51,6 +52,14 @@ namespace WebShop.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public JsonResult GetProducts()
+        {
+            var products = _context.Products.ToList();
+            var productJson = JsonConvert.SerializeObject(products);
+            return new JsonResult(productJson);
         }
     }
 }

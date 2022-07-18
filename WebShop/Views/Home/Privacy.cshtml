@@ -3,4 +3,49 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+
 <p>Use this page to detail your site's privacy policy.</p>
+
+<button type="button" id="GetProductsButton" class="btn btn-primary">Get Products</button>
+<div id="ProductDiv">
+
+</div>
+@section Products{
+    <script>
+$(document).ready(function() {
+    $("#GetProductsButton").click(function(e) {
+        e.preventDefault();
+        console.log("GetProductsButton has been clicked");
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetProducts")",
+            dataType: "json",
+            success: function(result) {
+                console.log(result);
+                let div = document.getElementById('ProductDiv');
+                let as = JSON.parse(result)
+                let array = json2array(as);
+                array.forEach(function(arrayItem) {
+                    let paragraph = document.createElement("p");
+                    let paragraphString = arrayItem["Name"] + " " + arrayItem["Description"] + " " + arrayItem["Price"];
+                    paragraph.append(paragraphString);
+                    div.appendChild(paragraph);
+                });
+            },
+            error: function(req, status, error) {
+                console.log(status);
+            }
+        });
+    });
+});
+
+function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+    </script>
+}

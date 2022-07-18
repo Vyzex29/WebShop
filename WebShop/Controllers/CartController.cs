@@ -53,6 +53,11 @@ namespace WebShop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public JsonResult EditQuantity(int quantity)
+        {
+            return new JsonResult(Ok());
+        }
         public IActionResult Purchase()
         {
             var userId = HttpContext.Session.GetUserId();
