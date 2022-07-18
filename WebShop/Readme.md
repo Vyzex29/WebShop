@@ -6,14 +6,14 @@
 
 	- Separation into admin and regular buyers - Done
 
-	- editable field for quantity - * bonus Blazor or jquerry
+	- editable field for quantity - * bonus Blazor or jquerry ~ in process
 	- Search function (Jquerry :)) ** more complex
 
 	- unitTests - this will help enforce SOLID and clean code - done
 	
 ## Explanations:
 	- Extensions explanation a bit more - done~ish
-	- Interfaces and registering containers (with unitTests)
+	- Interfaces and registering containers (with unitTests) done~ish
 
 ## DevOps:
 	- Pipelines  ** maybeeee

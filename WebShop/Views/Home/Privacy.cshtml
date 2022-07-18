@@ -6,7 +6,7 @@
 
 <p>Use this page to detail your site's privacy policy.</p>
 
-<button type="button" id="GetProductsButton" class="btn btn-primary">Get Products</button>
+<button type="button" id="GetProductsButton" onclick="" class="btn btn-primary">Get Products</button>
 <div id="ProductDiv">
 
 </div>
@@ -23,11 +23,14 @@ $(document).ready(function() {
             success: function(result) {
                 console.log(result);
                 let div = document.getElementById('ProductDiv');
-                let as = JSON.parse(result)
-                let array = json2array(as);
+                let json = JSON.parse(result)
+                let array = json2array(json);
                 array.forEach(function(arrayItem) {
                     let paragraph = document.createElement("p");
-                    let paragraphString = arrayItem["Name"] + " " + arrayItem["Description"] + " " + arrayItem["Price"];
+                    let paragraphString = "";
+                    for (const [key, value] of Object.entries(arrayItem)) {
+                      paragraphString += `${key}: ${value} `;
+                    }
                     paragraph.append(paragraphString);
                     div.appendChild(paragraph);
                 });
