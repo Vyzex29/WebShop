@@ -12,6 +12,8 @@ namespace WebShopServices.Managers
 
         public void AddItemToCart(int userId, int productId);
 
+        public void EditQuantity(int userId, int quantity, int productId);
+
         public void SubtractItemFromCart(int userId, int productId);
 
         public void RemoveItemFromCart(int userId, int productId);

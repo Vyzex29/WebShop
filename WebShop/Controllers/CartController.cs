@@ -40,10 +40,17 @@ namespace WebShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubtractAnItem(int itemId)
+        public JsonResult AddAProduct(int itemId)
+        {
+            _cartManager.AddItemToCart((int)HttpContext.Session.GetUserId(), itemId);
+            return new JsonResult(Ok());
+        }
+
+        [HttpPost]
+        public JsonResult SubtractAnItem(int itemId)
         {
             _cartManager.SubtractItemFromCart((int)HttpContext.Session.GetUserId(), itemId);
-            return RedirectToAction(nameof(Index));
+            return new JsonResult(Ok());
         }
 
         [HttpPost]
@@ -54,8 +61,9 @@ namespace WebShop.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditQuantity(int quantity)
+        public JsonResult EditQuantity(int quantity, int itemId)
         {
+            _cartManager.EditQuantity(userId:(int)HttpContext.Session.GetUserId(), quantity: quantity, productId: itemId);
             return new JsonResult(Ok());
         }
         public IActionResult Purchase()

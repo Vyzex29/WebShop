@@ -6,10 +6,13 @@
 
 	- Separation into admin and regular buyers - Done
 
-	- editable field for quantity - * bonus Blazor or jquerry ~ in process
-	- Search function (Jquerry :)) ** more complex
-
+	- editable field for quantity - * bonus Blazor or jquerry ~ Done javascript
+	
+	- having js files rendered 
+	- making picture bigger 
 	- unitTests - this will help enforce SOLID and clean code - done
+
+	- Search function (Jquerry :)) ** more complex
 	
 ## Explanations:
 	- Extensions explanation a bit more - done~ish

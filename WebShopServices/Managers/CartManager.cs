@@ -48,6 +48,20 @@ namespace WebShopServices.Managers
 
         }
 
+        public void EditQuantity(int userId, int quantity, int productId)
+        {
+            Cart cart = GetUserCart(userId);
+            if (cart.CartItems.Exists(ci => ci.Product.Id == productId))
+            {
+                var existingCartItem = cart.CartItems.First(ci => ci.Product.Id == productId);
+                if (quantity > 0)
+                {
+                    existingCartItem.Quantity = quantity;
+                }
+                _context.SaveChanges();
+            }
+        }
+
         public Cart? GetUserCart(int UserId)
         {
             return _context.Carts
