@@ -14,5 +14,18 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #FF9B71;
+}
+
+.customColor {
+    background-color: rgb(0, 94, 124);
+}
+
+.textColor {
+    color: rgb(0, 148, 198) !important;
+}
+
+#unique{
+    background-color: aqua;
 }

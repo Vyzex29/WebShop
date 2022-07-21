@@ -8,7 +8,7 @@
 
 	- editable field for quantity - * bonus Blazor or jquerry ~ Done javascript
 	
-	- having js files rendered 
+	- having js files rendered - done
 	- making picture bigger 
 	- unitTests - this will help enforce SOLID and clean code - done
 
