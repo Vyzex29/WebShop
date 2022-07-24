@@ -16,9 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTest", "..\UserTest\UserTest.csproj", "{09F73D8A-51F4-4688-B833-193CAF63BA61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShop.Tests", "..\WebShop.Tests\WebShop.Tests.csproj", "{A1B0D216-FED7-4A90-97EF-15A311FAE765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShop.Tests", "..\WebShop.Tests\WebShop.Tests.csproj", "{A1B0D216-FED7-4A90-97EF-15A311FAE765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopServices.Tests", "..\WebShopServices.Tests\WebShopServices.Tests.csproj", "{0DE1D6CE-4A36-49EF-B706-FF2194A67BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopServices.Tests", "..\WebShopServices.Tests\WebShopServices.Tests.csproj", "{0DE1D6CE-4A36-49EF-B706-FF2194A67BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorTest", "..\BlazorTest\BlazorTest.csproj", "{8F695D21-CC76-4AAE-A370-20E8998A0248}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{0DE1D6CE-4A36-49EF-B706-FF2194A67BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DE1D6CE-4A36-49EF-B706-FF2194A67BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DE1D6CE-4A36-49EF-B706-FF2194A67BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F695D21-CC76-4AAE-A370-20E8998A0248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F695D21-CC76-4AAE-A370-20E8998A0248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F695D21-CC76-4AAE-A370-20E8998A0248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F695D21-CC76-4AAE-A370-20E8998A0248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
