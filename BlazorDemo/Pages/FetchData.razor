@@ -1,0 +1,61 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Weather forecast</PageTitle>
+
+@using DataAccess.Context.Entity
+@using WebShopServices.Managers
+
+@inject ICategoryManager _categoryManager
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+<h4>Insert new Category</h4>
+<EditForm Model="@newCategory" OnSubmit="SubmitCategory">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <InputText id ="name" name="Name" @bind-Value="newCategory.Name"/>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@if (categories == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in categories)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Category> categories;
+    private Category newCategory = new Category();
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = _categoryManager.GetAll();
+    }
+
+    private async Task SubmitCategory()
+    {
+        _categoryManager.Add(newCategory);
+        categories.Add(newCategory);
+    }
+}

@@ -1,9 +1,7 @@
 ﻿using DataAccess.Context;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using WebShop.Extensions;
 using WebShop.Models;
 
 namespace WebShop.Controllers
@@ -12,35 +10,15 @@ namespace WebShop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly WebShopDbContext _context;
-
         public HomeController(ILogger<HomeController> logger, WebShopDbContext context)
         {
             _logger = logger;
             _context = context;
         }
 
-        public IActionResult Index(int? selectedCategory = 1)
+        public IActionResult Index()
         {
-
-            List<CategoryModel> categories = new List<CategoryModel>();
-            List<ProductModel> products = new List<ProductModel>();
-            using (_context)
-            {
-                categories = _context.Categories.Include(c => c.SubCategories)
-                    .Select(categoryFromDb => categoryFromDb.ToModel()).ToList();
-                    products = _context.Products
-                        .Where(pr => pr.Subcategory.Id == selectedCategory)
-                        .OrderBy(product => product.Name)
-                        .Select(productFromDb => productFromDb.ToModel()).ToList();
-            }
-
-            var homeView = new HomeViewModel
-            {
-                categories = categories,
-                products = products,
-            };
-
-            return View(homeView);
+            return View();
         }
 
         public IActionResult Privacy()

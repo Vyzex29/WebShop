@@ -1,0 +1,67 @@
+﻿@page "/counter"
+
+@using BlazorDemo.Data
+@using DataAccess.Context.Entity
+@using WebShopServices.Managers
+@inject ISubCategoryManager _subCategoryManager
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+@if(forecast == null)
+{
+    <p>
+        There is no forecast
+    </p>
+}
+else
+{
+    <p>@forecast[0].Summary</p>
+}
+<button class="btn btn-dark" @onclick="LoadSubCategories">Load Subs</button>
+@if (subCategories.Count == 0)
+{
+    <p><em>Click the load subs button :)</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in subCategories)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private int currentCount = 0;
+    private List<SubCategory> subCategories = new List<SubCategory>();
+    private WeatherForecastService weatherForecastService = new WeatherForecastService();
+    private WeatherForecast[] forecast;
+
+    private void LoadSubCategories(){
+        subCategories.AddRange(_subCategoryManager.GetAll());
+    }
+
+    private async Task IncrementCount()
+    {
+        forecast = await weatherForecastService.GetForecastAsync(DateTime.Now);
+        currentCount = currentCount + 5;
+    }
+}

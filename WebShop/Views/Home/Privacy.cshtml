@@ -5,7 +5,9 @@
 
 
 <p>Use this page to detail your site's privacy policy.</p>
-
+<div >
+@(await Html.RenderComponentAsync<WebShop.Views.Shared.Component>(RenderMode.ServerPrerendered,new {  Data= " Hello World " }))
+ </div> 
 <button type="button" id="GetProductsButton" onclick="" class="btn btn-primary">Get Products</button>
 <div id="ProductDiv">
 

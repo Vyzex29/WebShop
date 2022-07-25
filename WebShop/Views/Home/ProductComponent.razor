@@ -1,0 +1,75 @@
+﻿@using DataAccess.Context
+@using Microsoft.EntityFrameworkCore
+@using WebShop.Extensions
+@using WebShop.Models
+@inject HomeManager _homeManager
+
+@if(Model == null)
+        {
+            
+       <p> Page is loading</p>
+        }else{
+            <div class="row">
+           <div class="col-sm-4">
+        @foreach(var category in Model.categories)
+            {
+           
+              <div class="list-group">
+                <a href="#" class="list-group-item active">
+                  @category.Name
+                </a>
+                    @foreach (var subcategory in category.SubCategories)
+                    {
+                         <a @onclick="(() => ChangeSelectedCategory(subcategory.Id))" class="list-group-item">@subcategory.Name <span class="badge">4</span></a>
+                    }
+              </div>
+       
+            }
+         </div>
+        <div class="col-sm-8">
+          <div>
+            <div class="row">
+                    @if(Model.products.Count == 0)
+                    {
+                        <p id="unique">There are no products in the selected category.</p>
+                    }
+                    else
+                    {
+                        @foreach(var product in Model.products)
+                        {
+                         <div class="col-sm-6 col-md-4">
+                             <div class="thumbnail">
+                            @*<img class="img-thumbnail" src="@($"data:image/jpg;base64,{product.Blob}")" alt="..."/>*@
+                            <a data-fslightbox="gallery"  href="@(System.IO.Path.Combine("Photo", product.FileName))">
+                            <img class="img-thumbnail" src="@(System.IO.Path.Combine("Photo", product.FileName))" alt="..."/>
+                            </a>
+                                 <div class="caption text-center">
+                                     <h3>@product.Name</h3>
+                                     <p>Price: <span>$@product.Price</span></p>
+                                     <form asp-controller="Cart" asp-action="AddAnItem" asp-route-itemId="@product.Id" method="post">
+                                         <button type="submit" class="btn btn-primary" role="button">Add to cart</button>
+                                     </form>
+                                 </div>
+                             </div>
+                          </div>
+                        }
+                    }
+            </div>
+          </div>
+        </div>
+       </div>
+       }
+@code {
+    private HomeViewModel Model;
+    private int selectedCategory = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ChangeSelectedCategory();
+    }
+
+    private void ChangeSelectedCategory(int selectedSubCategoryId = 1)
+    {
+            Model = _homeManager.GetHomeData(selectedSubCategoryId);
+    }
+}
